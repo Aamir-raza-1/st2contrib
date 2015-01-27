@@ -3,7 +3,7 @@ from st2actions.runners.pythonrunner import Action
 
 
 
-class check_live_hosts(Action):  
+class CheckLiveHosts(Action):  
 
   def run(self, network):
     host_list = []
