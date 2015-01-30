@@ -7,7 +7,7 @@ class PortScanner(Action):
     result = []
     port_details = {}
     ps = nmap.PortScanner()
-    scan_res = ps.scan(host, arguments='--min-parallelism 100 -sT -sU -sZ')
+    scan_res = ps.scan(host, arguments='--min-parallelism 100 -sT')
     for target_host in ps.all_hosts():
       if target_host in ps.all_hosts():
         for comm in ps[target_host].all_protocols():
@@ -17,9 +17,4 @@ class PortScanner(Action):
              for port in ports:
                port_details = {port:{'state':ps[host][comm][port]['state'], 'service':ps[host][comm][port]['name'], 'protocol':comm}}
                result.append(port_details)
-    return result
-
-if __name__ == "__main__":
-  ps = PortScanner()
-  ps.run()
 
