@@ -39,3 +39,5 @@ Example trigger payload:
 * ``check_loadavg`` - Action which retrieves load average from a remote host.
 * ``check_processes`` - Action which retrieves useful information about
   matching process on a remote host.
+* ``get_open_ports`` - Action which scans for the open ports and lists all open ports, thier protocol type and thier states(open| filtered)
+* ``traceroute`` - Action that traceroute a given host
