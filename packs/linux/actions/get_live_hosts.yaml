@@ -4,8 +4,8 @@ description: List all hosts on a given Network
 enabled: true
 entry_point: get_live_hosts.py
 parameters:
-  network:
+  subnet:
     type: string
-    description: "Network to query live hosts "
+    description: "Subnet of a network to scan for live Hosts(192.168.0.0/24)"
     required: true
 
