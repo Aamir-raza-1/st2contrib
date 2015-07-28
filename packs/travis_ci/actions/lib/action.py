@@ -10,7 +10,7 @@ HEADER_CONTENT_TYPE = 'application/json'
 
 
 class TravisCI(Action):
-    def __init__(self):
+    def __init__(self, config):
         super(TravisCI, self).__init__(config)
         self.travis_token = self._get_travis_token(self.config['token'])
 
