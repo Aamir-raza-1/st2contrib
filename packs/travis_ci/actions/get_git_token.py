@@ -1,5 +1,5 @@
 from lib.action import TravisCI
-import yaml
+import json
 import requests
 
 
@@ -10,13 +10,14 @@ class GetGitToken(TravisCI):
         url = 'https://api.github.com/authorizations'
         host = 'api.github.com'
         ContentType = 'application/json'
-        data = '{"scopes": ["read:org", "user:email",\
-                "repo_deployment","repo:status", "write:repo_hook"],\
-                "note": "toke for travis api"}'
+        data = {"scopes": ["read:org", "user:email",
+                "repo_deployment", "repo:status", "write:repo_hook"],
+                "note": "token for travis api"}
         headers = {}
         headers['Host'] = host
         headers['Content-Type'] = ContentType
-        response = requests.post(url, data=data, auth=(username, password),
+        response = requests.post(url, data=json.dumps(data),
+                                 auth=(username, password),
                                  headers=headers)
-        res = yaml.load(response.content)
+        res = response.json()
         self.config['token'] = res['token']

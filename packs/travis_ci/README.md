@@ -3,6 +3,26 @@
 Pack for integration of Travis CI into StackStorm. The pack includes the
 functionality to perform actions on Travis CI through StackStorm.
 
+##Steps for using the pack
+
+### Authorizng Travis app
+Assuming that you have git account, now you need to authorize Travis
+application and grant access to you git authorized applcation.
+Once you are done with that you can use the listed action below.
+You can do that by either going to the url `https://github.com/settings/developers`
+or you can login to TravisCI using `sign in with github` option from
+`https://travis-ci.org/`. It will ask for permission. Click on `Authorize Application`
+option at the bottom and you are all set to launch the actions
+
+
+### Get Git Token
+You need to write your `git` credentials into the config file in the pack.
+when you add username and password, You need to execute the `get_git_token`
+action. The get_git_token action would acutomatically fetch you git token.
+The token would be written to the config file. This token would be used 
+in future request to the Travis CI app
+
+
 ## Actions
 
 ### List Repos

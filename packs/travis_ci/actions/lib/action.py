@@ -27,11 +27,14 @@ class TravisCI(Action):
 
     def _get_travis_token(self, api_key, path='/auth/github'):
         url = API_URL + path
-        headers = self._get_auth_headers()
-        data = {"github_token": api_key}
-        res = requests.post(url, data=json.dumps(data), headers=headers)
-        response = yaml.load(res.content)
-        return response['access_token']
+        try:
+            headers = self._get_auth_headers()
+            data = {"github_token": api_key}
+            res = requests.post(url, data=json.dumps(data), headers=headers)
+            response = yaml.load(res.content)
+            return response['access_token']
+        except:
+            raise Exception("token for git has not been set yet")
 
     def _perform_request(self, path, method, data=None, requires_auth=False):
         url = API_URL + path
