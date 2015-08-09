@@ -124,6 +124,8 @@ Click on `Generate new token` and give it proper permissions read/write. Then
 generate it. It will give you a key, you need to replace that in config file of
 the pack.
 
+![Alt text] (/_images/authorize  "Authorize application for accessing git")
+
 ![Alt text] (/_images/generate_new_token  "generate new token")
 
 
