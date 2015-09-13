@@ -7,12 +7,16 @@ from st2actions.runners.pythonrunner import Action
 API_URL = 'https://api.travis-ci.org'
 HEADER_ACCEPT = 'application/vnd.travis-ci.2+json'
 HEADER_CONTENT_TYPE = 'application/json'
+GIT_TOKEN = None
 
 
 class TravisCI(Action):
     def __init__(self, config):
         super(TravisCI, self).__init__(config)
-        self.travis_token = self._get_travis_token(self.config['token'])
+        global GIT_TOKEN
+        if GIT_TOKEN is None:
+            GIT_TOKEN = self.get_git_token()
+        self.travis_token = self._get_travis_token(GIT_TOKEN)
 
     def _get_base_headers(self):
         headers = {}
@@ -35,6 +39,24 @@ class TravisCI(Action):
             return response['access_token']
         except:
             raise Exception("token for git has not been set yet")
+
+    def _get_git_token(self):
+        username = self.config['username']
+        password = self.config['password']
+        url = 'https://api.github.com/authorizations'
+        host = 'api.github.com'
+        ContentType = 'application/json'
+        data = {"scopes": ["read:org", "user:email",
+                "repo_deployment", "repo:status", "write:repo_hook"],
+                "note": "token for travis api"}
+        headers = {}
+        headers['Host'] = host
+        headers['Content-Type'] = ContentType
+        response = requests.post(url, data=json.dumps(data),
+                                 auth=(username, password),
+                                 headers=headers)
+        res = response.json()
+        return res['token']
 
     def _perform_request(self, path, method, data=None, requires_auth=False):
         url = API_URL + path

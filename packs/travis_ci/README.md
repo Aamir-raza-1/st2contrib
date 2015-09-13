@@ -5,7 +5,7 @@ functionality to perform actions on Travis CI through StackStorm.
 
 ##Steps for using the pack
 
-### Authorizng Travis app
+### Authorizing Travis app
 Assuming that you have git account, now you need to authorize Travis
 application and grant access to you git authorized applcation.
 Once you are done with that you can use the listed action below.

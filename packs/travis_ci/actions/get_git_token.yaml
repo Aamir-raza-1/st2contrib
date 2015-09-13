@@ -1,5 +1,0 @@
-name: get_git_token
-runner_type: run-python
-description: Retrieve git token for travis api call
-enabled: true
-entry_point: get_git_token.py
