@@ -15,7 +15,7 @@ class TravisCI(Action):
         super(TravisCI, self).__init__(config)
         global GIT_TOKEN
         if GIT_TOKEN is None:
-            GIT_TOKEN = self.get_git_token()
+            GIT_TOKEN = self._get_git_token()
         self.travis_token = self._get_travis_token(GIT_TOKEN)
 
     def _get_base_headers(self):
